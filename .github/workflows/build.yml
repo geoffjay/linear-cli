@@ -19,13 +19,16 @@ jobs:
             asset_name: linear-cli-${{ github.ref_name }}-linux-x86_64.tar.gz
           - os: macos-latest
             asset_name: linear-cli-${{ github.ref_name }}-darwin-x86_64.tar.gz
+          - os: macos-latest
+            arch: aarch64
+            asset_name: linear-cli-${{ github.ref_name }}-darwin-aarch64.tar.gz
           - os: windows-latest
             asset_name: linear-cli-${{ github.ref_name }}-windows-x86_64.zip
 
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: ~/.cargo
           key: ${{ matrix.os }}-${{ hashFiles('Cargo.lock') }}
@@ -37,8 +40,15 @@ jobs:
           rustup default stable
 
       - name: Install Rust (macos)
-        if: matrix.os == 'macos-latest'
+        if: matrix.os == 'macos-latest' && matrix.arch != 'aarch64'
         run: |
+          curl https://sh.rustup.rs | sh -s -- -y
+          echo "{:$HOME/.cargo/bin}" >> $GITHUB_PATH
+
+      - name: Install Rust (macos aarch64)
+        if: matrix.os == 'macos-latest' && matrix.arch == 'aarch64'
+        run: |
+          rustup target add aarch64-apple-darwin
           curl https://sh.rustup.rs | sh -s -- -y
           echo "{:$HOME/.cargo/bin}" >> $GITHUB_PATH
 
@@ -50,11 +60,18 @@ jobs:
           rustup toolchain install nightly
 
       - name: Build
-        if: matrix.os != 'windows-latest'
+        if: matrix.os != 'windows-latest' && matrix.arch != 'aarch64'
         run: |
           cargo build --verbose --release
           strip target/release/linear-cli
           tar -czvf ${{ matrix.asset_name }} -C target/release linear-cli
+
+      - name: Build (macos aarch64)
+        if: matrix.os == 'macos-latest' && matrix.arch == 'aarch64'
+        run: |
+          cargo build --target aarch64-apple-darwin --verbose --release
+          strip target/aarch64-apple-darwin/release/linear-cli
+          tar -czvf ${{ matrix.asset_name }} -C target/aarch64-apple-darwin/release linear-cli
 
       - name: Build (windows)
         if: matrix.os == 'windows-latest'

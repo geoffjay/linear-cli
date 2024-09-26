@@ -49,16 +49,26 @@ cargo run -- issues list
 
 #### macOS
 
-Currently there are only builds in the release for x86_64, aarch64 is planned.
+Currently there are builds in the release for x86_64 and aarch64.
 
 This assumes that `~/.local/bin` exists, is in your `PATH`, and is where you
 want them to go. Adjust the command for your environment if this is not what's
 desired.
 
+##### x86_64
+
 ```shell
 curl -LO https://github.com/geoffjay/linear-cli/releases/latest/download/linear-cli-v0.1.0-darwin-x86_64.tar.gz
 tar -xf linear-cli-v0.1.0-darwin-x86_64.tar.gz -C ~/.local/bin
 rm linear-cli-v0.1.0-darwin-x86_64.tar.gz
+```
+
+##### aarch64
+
+```shell
+curl -LO https://github.com/geoffjay/linear-cli/releases/latest/download/linear-cli-v0.1.0-darwin-aarch64.tar.gz
+tar -xf linear-cli-v0.1.0-darwin-aarch64.tar.gz -C ~/.local/bin
+rm linear-cli-v0.1.0-darwin-aarch64.tar.gz
 ```
 
 #### Linux
