@@ -58,17 +58,17 @@ desired.
 ##### x86_64
 
 ```shell
-curl -LO https://github.com/geoffjay/linear-cli/releases/latest/download/linear-cli-v0.1.0-darwin-x86_64.tar.gz
-tar -xf linear-cli-v0.1.0-darwin-x86_64.tar.gz -C ~/.local/bin
-rm linear-cli-v0.1.0-darwin-x86_64.tar.gz
+curl -LO https://github.com/geoffjay/linear-cli/releases/latest/download/linear-cli-v0.1.1-darwin-x86_64.tar.gz
+tar -xf linear-cli-v0.1.1-darwin-x86_64.tar.gz -C ~/.local/bin
+rm linear-cli-v0.1.1-darwin-x86_64.tar.gz
 ```
 
 ##### aarch64
 
 ```shell
-curl -LO https://github.com/geoffjay/linear-cli/releases/latest/download/linear-cli-v0.1.0-darwin-aarch64.tar.gz
-tar -xf linear-cli-v0.1.0-darwin-aarch64.tar.gz -C ~/.local/bin
-rm linear-cli-v0.1.0-darwin-aarch64.tar.gz
+curl -LO https://github.com/geoffjay/linear-cli/releases/latest/download/linear-cli-v0.1.1-darwin-aarch64.tar.gz
+tar -xf linear-cli-v0.1.1-darwin-aarch64.tar.gz -C ~/.local/bin
+rm linear-cli-v0.1.1-darwin-aarch64.tar.gz
 ```
 
 #### Linux
@@ -80,9 +80,9 @@ want them to go. Adjust the command for your environment if this is not what's
 desired.
 
 ```shell
-curl -LO https://github.com/geoffjay/git-utils/releases/latest/download/git-utils-v0.1.1-linux-x86_64.tar.gz
-tar -xf linear-cli-v0.1.0-linux-x86_64.tar.gz -C ~/.local/bin
-rm linear-cli-v0.1.0-linux-x86_64.tar.gz
+curl -LO https://github.com/geoffjay/linear-cli/releases/latest/download/linear-cli-v0.1.1-linux-x86_64.tar.gz
+tar -xf linear-cli-v0.1.1-linux-x86_64.tar.gz -C ~/.local/bin
+rm linear-cli-v0.1.1-linux-x86_64.tar.gz
 ```
 
 #### Windows
