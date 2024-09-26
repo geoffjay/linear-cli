@@ -1,3 +1,7 @@
+[![cargo build](https://github.com/geoffjay/linear-cli/actions/workflows/build.yml/badge.svg)](https://github.com/geoffjay/linear-cli/actions/workflows/build.yml)
+
+---
+
 # Linear CLI
 
 > [!WARNING]
@@ -40,3 +44,42 @@ This just does one thing for now, list issues.
 ```shell
 cargo run -- issues list
 ```
+
+### Installation
+
+#### macOS
+
+Currently there are only builds in the release for x86_64, aarch64 is planned.
+
+This assumes that `~/.local/bin` exists, is in your `PATH`, and is where you
+want them to go. Adjust the command for your environment if this is not what's
+desired.
+
+```shell
+curl -LO https://github.com/geoffjay/linear-cli/releases/latest/download/linear-cli-v0.1.0-darwin-x86_64.tar.gz
+tar -xf linear-cli-v0.1.0-darwin-x86_64.tar.gz -C ~/.local/bin
+rm linear-cli-v0.1.0-darwin-x86_64.tar.gz
+```
+
+#### Linux
+
+Currently there are only builds in the release for x86_64, arm64 is planned.
+
+This assumes that `~/.local/bin` exists, is in your `PATH`, and is where you
+want them to go. Adjust the command for your environment if this is not what's
+desired.
+
+```shell
+curl -LO https://github.com/geoffjay/git-utils/releases/latest/download/git-utils-v0.1.1-linux-x86_64.tar.gz
+tar -xf linear-cli-v0.1.0-linux-x86_64.tar.gz -C ~/.local/bin
+rm linear-cli-v0.1.0-linux-x86_64.tar.gz
+```
+
+#### Windows
+
+There is a build for Windows, but I don't have a way to test that so this
+section will be left as-is for the foreseeable future.
+
+### License
+
+Licensed under the MIT license, see [here](./LICENSE).

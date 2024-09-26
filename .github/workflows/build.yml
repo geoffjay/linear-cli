@@ -1,0 +1,74 @@
+name: cargo build
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: cargo build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            asset_name: linear-cli-${{ github.ref_name }}-linux-x86_64.tar.gz
+          - os: macos-latest
+            asset_name: linear-cli-${{ github.ref_name }}-darwin-x86_64.tar.gz
+          - os: windows-latest
+            asset_name: linear-cli-${{ github.ref_name }}-windows-x86_64.zip
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v3
+        with:
+          path: ~/.cargo
+          key: ${{ matrix.os }}-${{ hashFiles('Cargo.lock') }}
+
+      - name: Install Rust (linux)
+        if: matrix.os == 'linux-latest'
+        run: |
+          rustup update stable
+          rustup default stable
+
+      - name: Install Rust (macos)
+        if: matrix.os == 'macos-latest'
+        run: |
+          curl https://sh.rustup.rs | sh -s -- -y
+          echo "{:$HOME/.cargo/bin}" >> $GITHUB_PATH
+
+      - name: Install Rust (windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          rustup update stable
+          rustup default stable
+          rustup toolchain install nightly
+
+      - name: Build
+        if: matrix.os != 'windows-latest'
+        run: |
+          cargo build --verbose --release
+          strip target/release/linear-cli
+          tar -czvf ${{ matrix.asset_name }} -C target/release linear-cli
+
+      - name: Build (windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          cargo +nightly install anonlink
+          anonlink
+          cargo +nightly build --verbose --release
+          Compress-Archive -Path target/release/linear-cli.exe -Destination ${{ matrix.asset_name }}
+
+      - name: Publish binaries
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ matrix.asset_name }}
+          asset_name: ${{ matrix.asset_name }}
+          tag: ${{ github.ref }}
+          overwrite: true
