@@ -1,5 +1,8 @@
 # Linear CLI
 
+> [!WARNING]
+> This is a WIP, might 🔥 your 🏠 down, don't use it
+
 A simple CLI for managing issues and pull requests in Linear using GraphQL.
 
 ## Prerequisites
@@ -28,4 +31,12 @@ graphql-client generate \
 
 ```shell
 cp .env.example .env
+```
+
+## Usage
+
+This just does one thing for now, list issues.
+
+```shell
+cargo run -- issues list
 ```
