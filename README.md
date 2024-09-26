@@ -37,14 +37,6 @@ graphql-client generate \
 cp .env.example .env
 ```
 
-## Usage
-
-This just does one thing for now, list issues.
-
-```shell
-cargo run -- issues list
-```
-
 ### Installation
 
 #### macOS
@@ -89,6 +81,14 @@ rm linear-cli-v0.1.1-linux-x86_64.tar.gz
 
 There is a build for Windows, but I don't have a way to test that so this
 section will be left as-is for the foreseeable future.
+
+## Usage
+
+### List Issues
+
+```shell
+linear-cli issues --list
+```
 
 ### License
 
